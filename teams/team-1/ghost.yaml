@@ -39,8 +39,7 @@ spec:
       - name: content
         persistentVolumeClaim:
           claimName: blog-content
-        
-        env:
+      env:
         - name: url
           value: http://my-blog.com
       restartPolicy: Always
