@@ -43,4 +43,3 @@ spec:
         - name: bitnamighost-mariadb-data
           persistentVolumeClaim:
             claimName: bitnamighost-mariadb-data
-status: {}
