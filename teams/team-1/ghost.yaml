@@ -1,61 +1,61 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: blog-content
-  namespace: team-1
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-storageClassName: standard
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: blog
-  namespace: team-1
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: blog
-  template:
-    metadata:
-      labels:
-        app: blog
-    spec:
-      containers:
-      - name: blog
-        image: ghost:4.22.0-alpine
-        ports:
-        - containerPort: 2368
-        imagePullPolicy: Always
-        volumeMounts:
-        - name: content 
-          mountPath: /var/lib/ghost/content
-      volumes:
-      - name: content
-        persistentVolumeClaim:
-          claimName: blog-content
-      # env:
-      #   - name: url
-      #     value: http://my-blog.com
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 5
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: blog
-  namespace: team-1
-spec:
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 2368
-  selector:
-    app: blog
-  type: LoadBalancer
----
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: blog-content
+#   namespace: team-1
+# spec:
+#   accessModes:
+#   - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 5Gi
+# storageClassName: standard
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: blog
+#   namespace: team-1
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: blog
+#   template:
+#     metadata:
+#       labels:
+#         app: blog
+#     spec:
+#       containers:
+#       - name: blog
+#         image: ghost:4.22.0-alpine
+#         ports:
+#         - containerPort: 2368
+#         imagePullPolicy: Always
+#         volumeMounts:
+#         - name: content 
+#           mountPath: /var/lib/ghost/content
+#       volumes:
+#       - name: content
+#         persistentVolumeClaim:
+#           claimName: blog-content
+#       # env:
+#       #   - name: url
+#       #     value: http://my-blog.com
+#       restartPolicy: Always
+#       terminationGracePeriodSeconds: 5
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: blog
+#   namespace: team-1
+# spec:
+#   ports:
+#   - protocol: TCP
+#     port: 80
+#     targetPort: 2368
+#   selector:
+#     app: blog
+#   type: LoadBalancer
+# ---
