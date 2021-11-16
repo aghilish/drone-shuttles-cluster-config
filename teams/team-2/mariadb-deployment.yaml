@@ -35,9 +35,9 @@ spec:
           "-c",
           "/bin/mkdir -p /bitnami/mariadb/data && /bin/chmod -R 777 /bitnami/mariadb",
         ]
-  volumeMounts:
-    - name: mariadb-data
-      mountPath: /bitnami
+      volumeMounts:
+        - name: mariadb-data
+          mountPath: /bitnami
       containers:
         - env:
             - name: ALLOW_EMPTY_PASSWORD
