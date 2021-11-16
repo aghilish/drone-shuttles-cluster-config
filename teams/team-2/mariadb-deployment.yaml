@@ -26,6 +26,18 @@ spec:
       labels:
         io.kompose.service: mariadb
     spec:
+      initContainers:
+      - name: mariadb-create-directory-structure
+      image: busybox
+      command:
+        [
+          "sh",
+          "-c",
+          "/bin/mkdir -p /bitnami/mariadb/data && /bin/chmod -R 777 /bitnami/mariadb",
+        ]
+  volumeMounts:
+    - name: mariadb-data
+      mountPath: /bitnami
       containers:
         - env:
             - name: ALLOW_EMPTY_PASSWORD
