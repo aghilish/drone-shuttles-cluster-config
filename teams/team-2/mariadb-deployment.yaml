@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: team-2
   annotations:
     kompose.cmd: kompose convert
     kompose.version: 1.24.0 (4a2a0458)
@@ -17,6 +18,7 @@ spec:
     type: Recreate
   template:
     metadata:
+      namespace: team-2
       annotations:
         kompose.cmd: kompose convert
         kompose.version: 1.24.0 (4a2a0458)
