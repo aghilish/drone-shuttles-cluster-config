@@ -2,17 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: team-2
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.24.0 (4a2a0458)
-  creationTimestamp: null
-  labels:
-    io.kompose.service: mariadb
   name: mariadb
 spec:
-  ports:
-    - name: "80"
-      port: 80
-      targetPort: 2368
   selector:
-    io.kompose.service: mariadb
+    name: mariadb
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  type: ClusterIP

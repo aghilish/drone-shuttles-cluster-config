@@ -2,29 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: team-2
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.24.0 (4a2a0458)
-  creationTimestamp: null
-  labels:
-    io.kompose.service: ghost
   name: ghost
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: ghost
+      name: ghost
   strategy:
     type: Recreate
   template:
     metadata:
       namespace: team-2
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.24.0 (4a2a0458)
-      creationTimestamp: null
-      labels:
-        io.kompose.service: ghost
     spec:
       containers:
         - env:
@@ -45,9 +33,9 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /bitnami/ghost
-              name: bitnamighost-ghost-data
+              name: ghost-data
       restartPolicy: Always
       volumes:
-        - name: bitnamighost-ghost-data
+        - name: ghost-data
           persistentVolumeClaim:
-            claimName: bitnamighost-ghost-data
+            claimName: ghost-data
