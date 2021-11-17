@@ -10,3 +10,4 @@ spec:
       targetPort: 2368
   selector:
     name: ghost
+  type: LoadBalancer
