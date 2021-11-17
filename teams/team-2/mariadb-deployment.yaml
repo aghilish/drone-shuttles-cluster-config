@@ -22,6 +22,20 @@ spec:
       annotations:
         kompose.cmd: kompose convert
         kompose.version: 1.24.0 (4a2a0458)
+        pod.beta.kubernetes.io/init-containers: '[
+            {
+                "name": "mariadb-create-directory-structure",
+                "image": "busybox",
+                "imagePullPolicy": "IfNotPresent",
+                "command": ["sh", "-c", "/bin/mkdir -p /bitnami/mariadb/data && /bin/chmod -R 777 /bitnami/mariadb"],
+                "volumeMounts": [
+                    {
+                      "name": "mariadb-data",
+                      "mountPath": "/bitnami"
+                    }
+                ]
+            }
+        ]'
       creationTimestamp: null
       labels:
         io.kompose.service: mariadb
