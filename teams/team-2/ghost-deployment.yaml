@@ -30,7 +30,7 @@ spec:
               value: "3306"
             - name: GHOST_DATABASE_USER
               value: bn_ghost
-          image: docker.io/bitnami/ghost
+          image: bitnami/ghost
           name: ghost
           ports:
             - containerPort: 2368
