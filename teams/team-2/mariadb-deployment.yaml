@@ -1,6 +1,5 @@
-apiVersion: v1beta1
-kind: Deployment.apps
-group: extensions
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   namespace: team-2
   annotations:
