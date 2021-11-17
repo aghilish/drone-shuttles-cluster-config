@@ -16,4 +16,3 @@ spec:
       targetPort: 2368
   selector:
     io.kompose.service: ghost
-  type: LoadBalancer
